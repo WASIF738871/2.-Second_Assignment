@@ -3,7 +3,9 @@ const customerModel = require('../models/customerModel');
 const signUp = async function (req, res) {
     try {
         let { firstName, lastName, mobileNumber, DOB, emailID } = req.body;
+        // if(Object.keys(req.body).length ==0){
 
+        // }
         if (!firstName) {
             return res.status(400).send({ status: false, message: "Please Enter First Name" })
         }
