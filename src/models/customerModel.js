@@ -1,17 +1,31 @@
 const mongoose  = require('mongoose');
 
 const customerSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    mobileNumber: Number,
-    DOB: Date,
-    emailID: String,
-    address: String,
-    customerID: String,
-    status:{
+    firstName: {
         type: String,
-        default: "INACTIVE"
-    }
+        require: true,
+        trim: true,
+    },
+    lastName:  {
+        type: String,
+        require: true,
+        trim: true,
+    },
+    mobileNumber:  {
+        type: String,
+        require: true,
+        unique: true,
+        trim: true,
+    },
+    DOB: Date,
+    emailID:  {
+        type: String,
+        require: true,
+        unique: true,
+        trim: true,
+    },
+    address: String,
+    
 },{timestaps:true});
 
 module.exports = mongoose.model('Customer', customerSchema)

@@ -1,12 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const customerRouter = require('./routes/customerRoute');
+const cardRouter = require('./routes/cardRoute');
 
 const app = express();
 
 app.use(express.json());
 
 app.use('/', customerRouter);
+app.use('/', cardRouter);
 
 // Mongoose connection
 mongoose.set('strictQuery',false)
