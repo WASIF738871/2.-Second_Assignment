@@ -24,8 +24,19 @@ const customerSchema = new mongoose.Schema({
         unique: true,
         trim: true,
     },
-    address: String,
-    
+    address: {
+        type: String,
+        trim: true
+    },
+    customerID:{
+        type: String,
+        trim:true
+    },
+    status:{
+        type: String,
+        default: "ACTIVE",
+        trim: true
+    }
 },{timestaps:true});
 
 module.exports = mongoose.model('Customer', customerSchema)

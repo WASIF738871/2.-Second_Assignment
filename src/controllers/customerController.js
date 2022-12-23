@@ -1,5 +1,7 @@
 const customerModel = require('../models/customerModel');
 
+
+//===============================CUSTOMER SIGNUP=============================================
 const signUp = async function (req, res) {
     try {
         let { firstName, lastName, mobileNumber, DOB, emailID } = req.body;
@@ -46,7 +48,40 @@ const signUp = async function (req, res) {
     }
 }
 
+//=====================================GET ALL CUSTOMER===================================
+
+const getActiveUsers = async function(req, res){
+    try{
+        let isActive = req.query.status;
+        let allActiveUsers = await customerModel.find({status:isActive});
+        if(!allActiveUsers.length){
+            return res.status(404).send({status:false, message: "No active users found"});
+        }
+        return res.status(200).send({status: true, message:`${allActiveUsers.length} user found`, allActiveUsers:allActiveUsers});
+
+    }
+    catch(error){
+        return res.status(500).send({status:false, message: error.message});
+    }
+}
+
+//==================================DELETE USERS===============================================
+
+const deleteCustomer = async function(req, res){
+    try{
+        let customerID = req.params.customerID;
+        let customerDeleted = await customerModel.findByIdAndUpdate(customerID,{$set:{status:"INACTIVE"}},{new: true});
+       
+        return res.status(200).send({status:false, message:`${customerDeleted.firstName+" "+customerDeleted.lastName} is deleted succssfully`, customerDeleted})
+    }
+    catch(error){
+        return res.status(500).send({status: false, message:error.message});
+    }
+}
+
 
 module.exports = {
-    signUp
+    signUp,
+    getActiveUsers,
+    deleteCustomer
 }

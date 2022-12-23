@@ -1,11 +1,13 @@
 const cardModel = require('../models/cardModel');
 const mongoose = require('mongoose');
 
+//===============================Create New Card==============================================
+
 const createCard = async function(req,res){
     try{
         let {cardType,customerName, customerID, cardNumber} = req.body;
         
-        if(!(cardType=="Diamond"|| cardType=="Silver" || cardType=="Gold")){
+        if(!(cardType=="REGULAR"|| cardType=="SPECIAL")){
             return res.status(400).send({status:false, message: "Please Select one one of the card type diamond, silver, Gold"})
         }
         if (!customerName) {
@@ -29,6 +31,23 @@ const createCard = async function(req,res){
     }
 }
 
+//=======================================Get All Card======================================
+
+const getAllCards = async function(req, res){
+    try{
+        let cardList = await cardModel.find();
+        if(!cardList.length){
+            return res.status(404).send({status: false, message:"No card found"})
+        }
+        return res.status(200).send({status: true, message:`${cardList.length} cards found`, cardList:cardList});
+
+    }
+    catch(error){
+        return res.status(500).send({status:false, message: error.message})
+    }
+}
+
 module.exports = {
-    createCard
+    createCard,
+    getAllCards
 }

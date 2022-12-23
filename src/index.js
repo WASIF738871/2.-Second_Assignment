@@ -23,5 +23,5 @@ mongoose.connect('mongodb+srv://WASIF321:Ansari738871@wasifdatabase.wdcjr.mongod
 // App is listening on the port 3000
 
 app.listen(3000, function(){
-    console.log('Express app is running on thr port 3000`')
+    console.log('Express app is running on the port 3000`')
 })

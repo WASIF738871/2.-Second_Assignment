@@ -4,7 +4,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 const cardSchema = new mongoose.Schema({
     cardType:{
         type: String,
-        enum: ["Diamond","Silver","Gold"],
+        enum: ["REGULAR","SPECIAL"],
         require: true,
         trim: true
     },
@@ -23,7 +23,7 @@ const cardSchema = new mongoose.Schema({
         require: true,
         trim: true
     },
-    Status: {
+    status: {
         type: String,
         default: "ACTIVE",
         trim: true
